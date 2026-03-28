@@ -1,5 +1,5 @@
 __pycache__/
-*.whl
+# *.whl
 *.sqlite3
 .env
 qrcodes/
