@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Live Scanner - Face System{% endblock %}
+{% block page_title %}Live Face Scanner{% endblock %}
+
+{% block content %}
+<div class="scanner-wrapper">
+    <div class="video-container">
+        <!-- The img src is the generator route returning multipart jpeg stream -->
+        <img src="{{ url_for('video_feed') }}" alt="Live Video Feed">
+    </div>
+    <div class="scanner-status">
+        <div class="pulse"></div>
+        Live Recognition Active & Scanning. Attendance is marked automatically.
+    </div>
+</div>
+{% endblock %}

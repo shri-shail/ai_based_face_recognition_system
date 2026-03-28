@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Face System{% endblock %}
+
+{% block page_title %}Overview Dashboard{% endblock %}
+
+{% block content %}
+<div class="stats-grid">
+    <div class="stat-card blue">
+        <div class="stat-title">Total Registered Students</div>
+        <div class="stat-value">{{ stats.total_students }}</div>
+    </div>
+    <div class="stat-card green">
+        <div class="stat-title">Present Today</div>
+        <div class="stat-value">{{ stats.present_today }}</div>
+    </div>
+    <div class="stat-card red">
+        <div class="stat-title">Absent Today</div>
+        <div class="stat-value">{{ stats.absent_today }}</div>
+    </div>
+</div>
+
+<div class="chart-container">
+    <canvas id="attendanceChart"></canvas>
+</div>
+
+<script>
+    const labels = {{ labels | tojson | safe }};
+    const dataVals = {{ data | tojson | safe }};
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Daily Attendance Counts',
+                    data: dataVals,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#94a3b8', stepSize: 1, font: { family: 'Inter', size: 12 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { family: 'Inter', size: 12 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { 
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleColor: '#f1f5f9',
+                        bodyColor: '#cbd5e1',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        padding: 12,
+                        titleFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        bodyFont: { family: 'Inter', size: 13 }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Success - Face System{% endblock %}
+{% block page_title %}Registration Successful{% endblock %}
+
+{% block content %}
+<div class="modern-form" style="text-align: center;">
+    <h2>Student Registered!</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 20px;">{{ name }} ({{ student_id }}) has been successfully registered.</p>
+    
+    <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block; margin-bottom: 20px;">
+        <img src="{{ url_for('static', filename='qrcodes/' ~ qr_filename) }}" alt="QR Code" style="width: 200px; height: 200px;">
+    </div>
+    
+    <p style="color: var(--text-secondary); margin-bottom: 20px;">Please save this QR Code. It can be used for hybrid attendance scanning.</p>
+    
+    <a href="{{ url_for('scanner') }}" class="btn-primary" style="text-decoration: none; display: inline-block; width: auto; padding: 12px 24px;">Go to Live Scanner</a>
+</div>
+{% endblock %}

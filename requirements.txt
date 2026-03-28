@@ -1,0 +1,17 @@
+customtkinter
+opencv-python
+mysql-connector-python
+pandas
+matplotlib
+qrcode
+pyzbar
+pillow
+cmake
+dlib
+face_recognition
+numpy
+fastapi
+uvicorn
+tensorflow
+scikit-learn
+Flask
